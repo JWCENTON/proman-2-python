@@ -31,3 +31,9 @@ function cardBuilder(card) {
     return `<div class="card" data-card-id="${card.id}">${card.title}</div>`;
 }
 
+export function createBoard() {
+    return `<div class="board-container">
+                <div class="board" ></div>
+                <button class="toggle-board-button">Create new board</button>
+            </div>`;
+}
