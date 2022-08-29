@@ -32,8 +32,17 @@ function cardBuilder(card) {
 }
 
 export function createBoard() {
-    return `<div class="board-container">
-                <div class="board" ></div>
-                <button class="toggle-board-button">Create new board</button>
-            </div>`;
+    return `        
+            <button id="create-board" type="button">Create new board</button>
+            <br>
+            <div id="bt" hidden>Board title :
+              <input id="save-title" type="text"/>
+            </div>
+            <br>
+            <div id="sb" hidden>
+              <button id="save-button" type="button">Save</button>
+            </div>
+            <br>
+`;
 }
+

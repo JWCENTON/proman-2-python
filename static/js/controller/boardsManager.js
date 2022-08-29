@@ -23,11 +23,38 @@ export let boardsManager = {
 function showHideButtonHandler(clickEvent) {
     const boardId = clickEvent.target.dataset.boardId;
     cardsManager.loadCards(boardId);
-}
+};
 
-function createBoardButton(){
+export function getNewBoardTitle(){
+    let saveButton = document.getElementById('save-button');
+    saveButton.addEventListener('click', () => {
+        let title = document.getElementById('save-title').value;
+        let boardTitle = document.getElementById("bt");
+        boardTitle.setAttribute('hidden', 'value');
+        let button = document.getElementById("create-board");
+        button.removeAttribute('hidden');
+        let saveButton = document.getElementById('sb');
+        saveButton.setAttribute('hidden', 'value');
+        console.log(title);
+        return title;
+    });
+};
+
+function createNewBoard(){
+    let button = document.getElementById("create-board");
+    button.addEventListener('click',() => {
+        let boardTitle = document.getElementById("bt");
+        boardTitle.removeAttribute('hidden');
+        button.setAttribute('hidden', 'value');
+        let saveButton = document.getElementById('sb');
+        saveButton.removeAttribute('hidden');
+        getNewBoardTitle(); // just for testing to check what is returned as a new board title in console
+    });
+};
+
+export function createBoardButton(){
     const boardBuilder = createBoard();
-    domManager.addChild('#root', boardBuilder)
-}
+    domManager.addChild('#root', boardBuilder);
+    createNewBoard();
+};
 
-createBoardButton();
