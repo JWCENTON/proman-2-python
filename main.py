@@ -54,13 +54,13 @@ def register():
 
         account = {}  # get user by username/ validation of username in db
         if account:
-            msg = 'Account already exists !'
+            print('Account already exists !')
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
-            msg = 'Invalid email address !'
+            print('Invalid email address !')
         elif not re.match(r'[A-Za-z0-9]+', username):
-            msg = 'Username must contain only characters and numbers !'
+            print('Username must contain only characters and numbers !')
         elif not username or not password or not email:
-            msg = 'Please fill out the form !'
+            print('Please fill out the form !')
         else:
             # add user to db function here
             print("Success!")
