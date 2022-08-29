@@ -30,12 +30,13 @@ export function getNewBoardTitle(){
     saveButton.addEventListener('click', () => {
         let title = document.getElementById('save-title').value;
         let boardTitle = document.getElementById("bt");
-        boardTitle.setAttribute('hidden', 'value');
         let button = document.getElementById("create-board");
-        button.removeAttribute('hidden');
         let saveButton = document.getElementById('sb');
+        document.getElementById('save-title').value = '';
+        boardTitle.setAttribute('hidden', 'value');
+        button.removeAttribute('hidden');
         saveButton.setAttribute('hidden', 'value');
-        console.log(title);
+        console.log(title); // consoling for testing 
         return title;
     });
 };
