@@ -8,6 +8,7 @@ mimetypes.add_type('application/javascript', '.js')
 app = Flask(__name__)
 load_dotenv()
 
+
 @app.route("/")
 def index():
     """
@@ -40,7 +41,8 @@ def main():
 
     # Serving the favicon
     with app.app_context():
-        app.add_url_rule('/favicon.ico', redirect_to=url_for('static', filename='favicon/favicon.ico'))
+        app.add_url_rule(
+            '/favicon.ico', redirect_to=url_for('static', filename='favicon/favicon.ico'))
 
 
 if __name__ == '__main__':
