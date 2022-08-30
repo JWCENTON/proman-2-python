@@ -51,7 +51,6 @@ def get_user_by_username(username):
         """SELECT * FROM users
         WHERE username= %(username)s ; """, {"username": username}, False
     )
-
     return matching_account
 
 
