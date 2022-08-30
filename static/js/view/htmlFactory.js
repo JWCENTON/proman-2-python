@@ -21,10 +21,22 @@ export function htmlFactory(template) {
 }
 
 function boardBuilder(board) {
-    return `<div class="board-container">
-                <div class="board" data-board-id=${board.id}>${board.title}</div>
-                <button class="toggle-board-button" data-board-id="${board.id}">Show Cards</button>
-            </div>`;
+  let boardComponent = `<section class="board" data-board-id="${board.id}">
+                          <div class="board-header" data-board-id="${board.id}">
+                            <span class="board-title" data-board-id="${board.id}">${board.title}</span>
+                            <button class="board-add" data-board-id="${board.id}">Add Card</button>
+                            <button class="board-add-column" data-board-id="${board.id}">Add Another List</button>
+                            <button class="board-toggle-archived" data-board-id="${board.id}">Show Board</button>
+                           
+                             `;
+  // boardComponent += (board['user_id'] === userId) ? `<button class="board-remove" aria-label="Remove board" ????????????????????????????
+  //                                                            data-board-id="${board.id}">
+  //                                                      <i class="fas fa-trash-alt" aria-hidden="true"
+  //                                                         data-board-id="${board.id}"></i>
+  //                                                    </button>` : ``;
+
+  return boardComponent;
+
 }
 
 function cardBuilder(card) {
