@@ -1,4 +1,3 @@
-from urllib import request
 from flask import Flask,  request, render_template, url_for, session, redirect
 from dotenv import load_dotenv
 from util import json_response
