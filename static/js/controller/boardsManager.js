@@ -1,4 +1,4 @@
-import {dataHandler} from "../data/dataHandler.js";
+import {dataHandler, sendBoardTitle} from "../data/dataHandler.js";
 import {htmlFactory, htmlTemplates, createBoard} from "../view/htmlFactory.js";
 import {domManager} from "../view/domManager.js";
 import {cardsManager} from "./cardsManager.js";
@@ -47,6 +47,7 @@ export function getNewBoardTitle(){
         button.removeAttribute('hidden');
         saveButton.setAttribute('hidden', 'value');
         console.log(title); // consoling for testing
+        sendBoardTitle(title);
         return title;
     });
 };

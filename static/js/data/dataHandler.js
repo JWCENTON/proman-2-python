@@ -46,3 +46,16 @@ async function apiPut(url) {
 async function apiPatch(url) {
 }
 
+export async function sendBoardTitle(title){
+    fetch("http://127.0.0.1:5000/board_title", {
+            method: "POST",
+            body: JSON.stringify({
+                title: title
+            }),
+            headers: {
+                "Content-type": "application/json"
+            }
+        })
+        // Converting to JSON
+        .then(response => response.json())
+};

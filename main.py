@@ -1,4 +1,4 @@
-from flask import Flask,  request, render_template, url_for, session, redirect
+from flask import Flask,  request, render_template, url_for, session, redirect, jsonify
 from dotenv import load_dotenv
 from util import json_response
 import mimetypes
@@ -12,7 +12,14 @@ app.secret_key = secrets.token_hex()
 load_dotenv()
 
 
-@app.route("/")
+@app.route('/board_title', methods=['GET', 'POST'])
+def board_title():
+    output = request.get_json()
+    output = jsonify(output)
+    print(output)  # This is the output that was stored in the JSON within the browser
+    return redirect(url_for('index'))
+
+@app.route("/", methods=['GET', 'POST'])
 def index():
     """
     This is a one-pager which shows all the boards and cards
