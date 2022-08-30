@@ -36,7 +36,7 @@ export function createBoard() {
             <button id="create-board" type="button">Create new board</button>
             <br>
             <div id="bt" hidden>Board title :
-              <input id="save-title" type="text"/>
+              <input id="save-title" minlength="1" maxlength="50" required title="1 character minimum" type="text"/>
             </div>
             <br>
             <div id="sb" hidden>

@@ -25,10 +25,20 @@ function showHideButtonHandler(clickEvent) {
     cardsManager.loadCards(boardId);
 };
 
+function checkForEmptyTitle(title){
+    if (!title || title == ' '){
+        return false
+    }
+    return true
+};
+
 export function getNewBoardTitle(){
     let saveButton = document.getElementById('save-button');
     saveButton.addEventListener('click', () => {
         let title = document.getElementById('save-title').value;
+        if (checkForEmptyTitle(title) == false) {
+            return console.log('Empty title');
+        }
         let boardTitle = document.getElementById("bt");
         let button = document.getElementById("create-board");
         let saveButton = document.getElementById('sb');
@@ -36,7 +46,7 @@ export function getNewBoardTitle(){
         boardTitle.setAttribute('hidden', 'value');
         button.removeAttribute('hidden');
         saveButton.setAttribute('hidden', 'value');
-        console.log(title); // consoling for testing 
+        console.log(title); // consoling for testing
         return title;
     });
 };
