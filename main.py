@@ -1,13 +1,14 @@
-from urllib import request
 from flask import Flask,  request, render_template, url_for, session, redirect
 from dotenv import load_dotenv
 from util import json_response
 import mimetypes
+import secrets
 import queries
 import re
 
 mimetypes.add_type('application/javascript', '.js')
 app = Flask(__name__)
+app.secret_key = secrets.token_hex()
 load_dotenv()
 
 
@@ -25,7 +26,12 @@ def login():
         username = request.form['username']
         password = request.form['password']
         # get user by username and password match
-        account = {}
+        acc = queries.get_user_by_username(username)
+        print(acc)
+        if acc['username'] == username and acc['password'] == password:
+            account = acc
+        else:
+            account = None
         if account:
             session['loggedin'] = True
             session['id'] = account['id']
@@ -52,7 +58,7 @@ def register():
         password = request.form['password']
         email = request.form['email']
 
-        account = {}  # get user by username/ validation of username in db
+        account = queries.get_user_by_username(username)
         if account:
             print('Account already exists !')
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
@@ -62,7 +68,8 @@ def register():
         elif not username or not password or not email:
             print('Please fill out the form !')
         else:
-            # add user to db function here
+            queries.insert_user(
+                {'username': username, 'email': email, 'password': password})
             print("Success!")
 
     return render_template('signup.html')
