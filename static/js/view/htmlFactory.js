@@ -31,3 +31,18 @@ function cardBuilder(card) {
     return `<div class="card" data-card-id="${card.id}">${card.title}</div>`;
 }
 
+export function createBoard() {
+    return `        
+            <button id="create-board" type="button">Create new board</button>
+            <br>
+            <div id="bt" hidden>Board title :
+              <input id="save-title" minlength="1" maxlength="50" required title="1 character minimum" type="text"/>
+            </div>
+            <br>
+            <div id="sb" hidden>
+              <button id="save-button" type="button">Save</button>
+            </div>
+            <br>
+`;
+}
+
