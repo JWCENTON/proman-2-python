@@ -12,14 +12,14 @@ app.secret_key = secrets.token_hex()
 load_dotenv()
 
 
-@app.route('/board_title', methods=['GET', 'POST'])
+@app.route('/board_title', methods=['POST'])
 def board_title():
     output = request.get_json()
-    output = jsonify(output)
     print(output)  # This is the output that was stored in the JSON within the browser
-    return redirect(url_for('index'))
+    return output
 
-@app.route("/", methods=['GET', 'POST'])
+
+@app.route("/")
 def index():
     """
     This is a one-pager which shows all the boards and cards
