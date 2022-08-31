@@ -57,10 +57,10 @@ CREATE TABLE users (
 --- insert data
 ---
 
-INSERT INTO statuses(title) VALUES ('new');
-INSERT INTO statuses(title) VALUES ('in progress');
-INSERT INTO statuses(title) VALUES ('testing');
-INSERT INTO statuses(title) VALUES ('done');
+INSERT INTO statuses(title) VALUES ('new',1 , 1);
+INSERT INTO statuses(title) VALUES ('in progress', 2, 1);
+INSERT INTO statuses(title) VALUES ('testing',3 , 1);
+INSERT INTO statuses(title) VALUES ('done',4 ,1);
 
 INSERT INTO boards(title) VALUES ('Board 1');
 INSERT INTO boards(title) VALUES ('Board 2');
