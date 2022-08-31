@@ -26,7 +26,7 @@ function boardBuilder(board) {
     return `<div class="board-container">
                 <section class="board" data-board-id=${board.id}> 
                     <div class="board-header">
-                        <span class="board-title" data-board-id="${board.id}">${board.title}</span> <span> is private? ${board.is_private}</span>
+                        <span class="board-title" data-board-id="${board.id}">${board.title}</span> 
                         <input class="board-title-edit hidden" data-board-id="${board.id}" value="${board.title}"/>
                         <button class="board-title-save hidden" data-board-id="${board.id}">Save title</button>
                         <span> is private? ${board.is_private}</span>
