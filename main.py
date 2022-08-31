@@ -33,7 +33,6 @@ def login():
         else:
             account = None
         if account:
-            session['loggedin'] = True
             session['id'] = account['id']
             session['username'] = account['username']
             return redirect(url_for('index'))
@@ -44,7 +43,6 @@ def login():
 
 @app.route("/logout")
 def logout():
-    session.pop('loggedin', None)
     session.pop('id', None)
     session.pop('username', None)
     return redirect(url_for('login'))
@@ -112,6 +110,13 @@ def get_cards_for_board(board_id: int):
     :param board_id: id of the parent board
     """
     return queries.get_cards_for_board(board_id)
+
+
+@app.route("/api/statuses")
+@json_response
+def get_statuses():
+
+    return queries.get_statuses()
 
 
 def main():
