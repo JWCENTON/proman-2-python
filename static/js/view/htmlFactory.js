@@ -24,6 +24,8 @@ function boardBuilder(board) {
   let boardComponent = `<section class="board" data-board-id="${board.id}">
                           <div class="board-header" data-board-id="${board.id}">
                             <span class="board-title" data-board-id="${board.id}">${board.title}</span>
+                            <input class="board-title-edit" data-board-id="${board.id}" value="${board.title}" hidden/>
+                            <button class="board-title-save" data-board-id="${board.id}" hidden>Save title</button>
                             <button class="board-add" data-board-id="${board.id}">Add Card</button>
                             <button class="board-add-column" data-board-id="${board.id}">Add Another List</button>
                             <button class="board-toggle-archived" data-board-id="${board.id}">Show Board</button>
@@ -36,8 +38,8 @@ function boardBuilder(board) {
   //                                                    </button>` : ``;
 
   return boardComponent;
-
 }
+
 
 function cardBuilder(card) {
     return `<div class="card" data-card-id="${card.id}">${card.title}</div>`;

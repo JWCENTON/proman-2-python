@@ -16,6 +16,16 @@ export let boardsManager = {
                 "click",
                 showHideButtonHandler
             );
+            domManager.addEventListener(
+                `.board-title[data-board-id="${board.id}"]`,
+                "click",
+                startEditBoardTitle
+            );
+            domManager.addEventListener(
+                `.board-title-save[data-board-id="${board.id}"]`,
+                "click",
+                endEditBoardTitle
+            );
         }
     },
 };
@@ -31,6 +41,29 @@ function checkForEmptyTitle(title){
     }
     return true
 };
+
+function startEditBoardTitle(e) {
+    let spanElem = e.target;
+    spanElem.hidden = true;
+    let boardId = spanElem.getAttribute('data-board-id');
+    let inputElem = document.querySelector(`.board-title-edit[data-board-id="${boardId}"]`)
+    console.log("InputElem: ", inputElem);
+    inputElem.hidden = false;
+    let saveElem = document.querySelector(`.board-title-save[data-board-id="${boardId}"]`)
+    console.log("SaveElem: ", saveElem);
+    saveElem.hidden = false;
+}
+
+function endEditBoardTitle(e) {
+    let saveElem = e.target;
+    saveElem.hidden = true;
+    let boardId = saveElem.getAttribute('data-board-id');
+    let inputElem = document.querySelector(`.board-title-edit[data-board-id="${boardId}"]`)
+    inputElem.hidden = true;
+    let spanElem = document.querySelector(`.board-title[data-board-id="${boardId}"]`)
+    spanElem.hidden = false;
+    // send data to api -> POST on /api/board/${boardId}
+}
 
 export function getNewBoardTitle(){
     let saveButton = document.getElementById('save-button');
