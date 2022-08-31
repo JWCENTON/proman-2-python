@@ -1,4 +1,4 @@
-import {dataHandler, sendBoardTitle} from "../data/dataHandler.js";
+import {dataHandler, sendBoardTitle, apiPost} from "../data/dataHandler.js";
 import {htmlFactory, htmlTemplates, createBoard} from "../view/htmlFactory.js";
 import {domManager} from "../view/domManager.js";
 import {cardsManager} from "./cardsManager.js";
@@ -67,25 +67,32 @@ function addBoardStatus(clickEvent){
 
 function startEditBoardTitle(e) {
     let spanElem = e.target;
-    spanElem.hidden = true;
+
     let boardId = spanElem.getAttribute('data-board-id');
     let inputElem = document.querySelector(`.board-title-edit[data-board-id="${boardId}"]`)
     console.log("InputElem: ", inputElem);
-    inputElem.hidden = false;
+    inputElem.classList.toggle("hidden");
+    spanElem.classList.toggle("hidden");
     let saveElem = document.querySelector(`.board-title-save[data-board-id="${boardId}"]`)
     console.log("SaveElem: ", saveElem);
-    saveElem.hidden = false;
+    saveElem.classList.toggle("hidden");
 }
 
 function endEditBoardTitle(e) {
     let saveElem = e.target;
-    saveElem.hidden = true;
+    saveElem.classList.toggle("hidden");
     let boardId = saveElem.getAttribute('data-board-id');
     let inputElem = document.querySelector(`.board-title-edit[data-board-id="${boardId}"]`)
-    inputElem.hidden = true;
+    let newTitle = inputElem.value
+    inputElem.classList.toggle("hidden");
     let spanElem = document.querySelector(`.board-title[data-board-id="${boardId}"]`)
-    spanElem.hidden = false;
+    spanElem.innerHTML = newTitle;
+    spanElem.classList.toggle("hidden");
     // send data to api -> POST on /api/board/${boardId}
+    let payload = {};
+    payload.id = boardId;
+    payload.title = newTitle;
+    apiPost("http://127.0.0.1:5000/api/boards/" + `${boardId}`, payload);
 }
 
 export function getNewBoardTitle(){
