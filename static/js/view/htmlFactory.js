@@ -26,7 +26,7 @@ function boardBuilder(board) {
     return `<div class="board-container">
                 <section class="board" data-board-id=${board.id}> 
                     <div class="board-header">
-                        <span class="board-title" data-board-id="${board.id}">${board.title}</span>
+                        <span class="board-title" data-board-id="${board.id}">${board.title}</span> <span> is private? ${board.is_private}</span>
                         <input class="board-title-edit" data-board-id="${board.id}" value="${board.title}" hidden/>
                         <button class="board-title-save" data-board-id="${board.id}" hidden>Save title</button>
                         <button class="board-add">Add Card</button>
@@ -42,6 +42,7 @@ function cardBuilder(card) {
         <div class="card" data-card-id="${card.id}">
             <div class="card-remove"><i class="fas fa-trash-alt"></i></div>
             <div class="card-title">${card.title}</div>
+            
         </div>
 
     `;
@@ -51,7 +52,7 @@ function columnBuilder(status){
     return `
         <div class="board-column">
             <div class="board-column-title">${status.title}</div>
-            <div class="board-column-content" data-status-id="${status.id}">
+            <div class="board-column-content" data-status-id="${status.status_id}">
          
 
     `

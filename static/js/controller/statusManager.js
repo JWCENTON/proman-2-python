@@ -8,8 +8,9 @@ export let statusManager = {
         for (let status of statuses) {
             const statusesBuilder = htmlFactory(htmlTemplates.statuses);
             const content = statusesBuilder(status);
+            if(status.board_id == boardId){
             domManager.addChild(`.board-columns[data-board-id="${boardId}"`, content);
-          
+          }
         }
     },
 };
