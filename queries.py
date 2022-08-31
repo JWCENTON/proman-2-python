@@ -60,3 +60,11 @@ def insert_user(user):
     INSERT INTO users
      VALUES (DEFAULT, %s, %s, %s );
     """, (user['username'], user['email'], user['password']))
+
+
+def insert_new_board_title(board_title):
+    data_manager.execute_insert(
+        """
+        INSERT INTO boards (title) VALUES (%(b_t)s);
+        """, {'b_t': board_title}
+    )

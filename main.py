@@ -15,8 +15,10 @@ load_dotenv()
 @app.route('/board_title', methods=['POST'])
 def board_title():
     output = request.get_json()
-    print(output)  # This is the output that was stored in the JSON within the browser
-    return output
+    title = output.get('title')
+    print(title)  # This is the output that was stored in the JSON within the browser
+    queries.insert_new_board_title(title)
+    return redirect('/')
 
 
 @app.route("/")
