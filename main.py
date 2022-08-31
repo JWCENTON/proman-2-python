@@ -148,6 +148,23 @@ def get_statuses():
     return queries.get_statuses()
 
 
+@app.route("/add-new-status", methods=['POST'])
+@json_response
+def add_new_status():
+    data = request.get_json()
+    if data is not None:
+        queries.insert_sataus(data)
+
+    else:
+        raise ValueError
+
+
+@app.route("/api/statuses/<int:status_id>/delete", methods=['DELETE'])
+@json_response
+def delete_status(status_id):
+    queries.delete_status(status_id)
+
+
 def main():
     app.run(debug=True)
 

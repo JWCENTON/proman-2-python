@@ -29,7 +29,9 @@ function boardBuilder(board) {
                         <span class="board-title" data-board-id="${board.id}">${board.title}</span> <span> is private? ${board.is_private}</span>
                         <input class="board-title-edit hidden" data-board-id="${board.id}" value="${board.title}"/>
                         <button class="board-title-save hidden" data-board-id="${board.id}">Save title</button>
+                        <span> is private? ${board.is_private}</span>
                         <button class="board-add">Add Card</button>
+                        <button class="status-add" data-board-id="${board.id}">Add Status</button>
                         <button class="board-toggle" data-board-id="${board.id}">⬇️</button>
                     </div>
                     <div id="col" class="board-columns" data-board-id="${board.id}">
@@ -52,6 +54,7 @@ function cardBuilder(card) {
 function columnBuilder(status){
     return `
         <div class="board-column">
+            <div class="remove-column" data-status-id="${status.id}"><i class="fas fa-trash-alt" data-status-id="${status.id}"></i></div>
             <div class="board-column-title">${status.title}</div>
             <div class="board-column-content" data-status-id="${status.status_id}">
          
