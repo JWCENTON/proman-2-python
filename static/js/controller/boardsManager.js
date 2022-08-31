@@ -33,8 +33,7 @@ export let boardsManager = {
 
 function showHideButtonHandler(clickEvent) {
     const boardId = clickEvent.target.dataset.boardId;
-    const ss = document.querySelector(`.board-toggle[data-board-id="${boardId}"]`);
-    ss.classList.toggle('hidden')
+    document.querySelector(`.board-toggle[data-board-id="${boardId}"]`).classList.toggle('hidden');
     statusManager.loadStatuses(boardId);
     cardsManager.loadCards(boardId);
 };
