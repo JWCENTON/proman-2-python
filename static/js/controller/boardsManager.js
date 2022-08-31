@@ -1,4 +1,4 @@
-import {dataHandler, sendBoardTitle} from "../data/dataHandler.js";
+import {dataHandler, sendBoardTitle, apiPost} from "../data/dataHandler.js";
 import {htmlFactory, htmlTemplates, createBoard} from "../view/htmlFactory.js";
 import {domManager} from "../view/domManager.js";
 import {cardsManager} from "./cardsManager.js";
@@ -63,10 +63,16 @@ function endEditBoardTitle(e) {
     saveElem.hidden = true;
     let boardId = saveElem.getAttribute('data-board-id');
     let inputElem = document.querySelector(`.board-title-edit[data-board-id="${boardId}"]`)
+    let newTitle = inputElem.value
     inputElem.hidden = true;
     let spanElem = document.querySelector(`.board-title[data-board-id="${boardId}"]`)
+    spanElem.innerHTML = newTitle;
     spanElem.hidden = false;
     // send data to api -> POST on /api/board/${boardId}
+    let payload = {};
+    payload.id = boardId;
+    payload.title = newTitle;
+    apiPost("http://127.0.0.1:5000/api/boards/" + `${boardId}`, payload);
 }
 
 export function getNewBoardTitle(){

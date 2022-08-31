@@ -34,7 +34,15 @@ async function apiGet(url) {
     }
 }
 
-async function apiPost(url, payload) {
+export async function apiPost(url, payload) {
+    fetch(url, {
+            method: "POST",
+            body: JSON.stringify(payload),
+            headers: {
+                "Content-type": "application/json"
+            }
+        })
+        .then(response => response.json())
 }
 
 async function apiDelete(url) {
