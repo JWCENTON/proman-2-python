@@ -47,26 +47,27 @@ function checkForEmptyTitle(title){
 
 function startEditBoardTitle(e) {
     let spanElem = e.target;
-    spanElem.hidden = true;
+
     let boardId = spanElem.getAttribute('data-board-id');
     let inputElem = document.querySelector(`.board-title-edit[data-board-id="${boardId}"]`)
     console.log("InputElem: ", inputElem);
-    inputElem.hidden = false;
+    inputElem.classList.toggle("hidden");
+    spanElem.classList.toggle("hidden");
     let saveElem = document.querySelector(`.board-title-save[data-board-id="${boardId}"]`)
     console.log("SaveElem: ", saveElem);
-    saveElem.hidden = false;
+    saveElem.classList.toggle("hidden");
 }
 
 function endEditBoardTitle(e) {
     let saveElem = e.target;
-    saveElem.hidden = true;
+    saveElem.classList.toggle("hidden");
     let boardId = saveElem.getAttribute('data-board-id');
     let inputElem = document.querySelector(`.board-title-edit[data-board-id="${boardId}"]`)
     let newTitle = inputElem.value
-    inputElem.hidden = true;
+    inputElem.classList.toggle("hidden");
     let spanElem = document.querySelector(`.board-title[data-board-id="${boardId}"]`)
     spanElem.innerHTML = newTitle;
-    spanElem.hidden = false;
+    spanElem.classList.toggle("hidden");
     // send data to api -> POST on /api/board/${boardId}
     let payload = {};
     payload.id = boardId;
