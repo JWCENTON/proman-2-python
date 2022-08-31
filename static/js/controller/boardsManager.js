@@ -85,6 +85,7 @@ export function getNewBoardTitle(){
         saveButton.setAttribute('hidden', 'value');
         console.log(title); // consoling for testing
         sendBoardTitle(title);
+        window.location.reload();
         return title;
     });
 };
