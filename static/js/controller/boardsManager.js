@@ -43,7 +43,6 @@ export let boardsManager = {
 };
 
 function addCard(boardID){
-    console.log('dupa');
     // Get the modal
     let modal = document.getElementById("myModal");
 
@@ -53,22 +52,35 @@ function addCard(boardID){
     // Get the <span> element that closes the modal
     let span = document.getElementsByClassName("close")[0];
 
+    // Get input when save
+    let input = document.getElementById(`card-input${boardID}`);
+
+    // Get the save button to save the input
+    let save = document.getElementById(`save-card${boardID}`);
+
     // When the user clicks on the button, open the modal
-    btn.onclick = function() {
+    btn.addEventListener('click', () => {
       modal.style.display = "block";
-    }
+    })
 
     // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
+    span.addEventListener('click', () => {
       modal.style.display = "none";
-    }
+    })
+
+    // When user click on save button it saves the input
+    save.addEventListener('click', () => {
+        console.log(`${input.value} input`);
+        modal.style.display = "none";
+        input.value = '';
+    })
 
     // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
+    window.addEventListener('click', event => {
       if (event.target == modal) {
         modal.style.display = "none";
       }
-    }
+    })
 }
 
 function showHideButtonHandler(clickEvent) {
