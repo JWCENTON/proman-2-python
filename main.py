@@ -42,7 +42,6 @@ def login():
         else:
             account = None
         if account:
-            session['loggedin'] = True
             session['id'] = account['id']
             session['username'] = account['username']
             return redirect(url_for('index'))
@@ -53,7 +52,6 @@ def login():
 
 @app.route("/logout")
 def logout():
-    session.pop('loggedin', None)
     session.pop('id', None)
     session.pop('username', None)
     return redirect(url_for('login'))
@@ -93,6 +91,26 @@ def get_boards():
     return queries.get_boards()
 
 
+@app.route("/api/boards/<int:board_id>")
+@json_response
+def get_board(board_id):
+    """
+    Returns board by id
+    """
+    return queries.get_board(board_id)
+
+
+@app.route("/api/boards/<int:board_id>", methods=['POST'])
+@json_response
+def save_board(board_id: int):
+    data = request.get_json()
+    if data is not None:
+        queries.update_board(data)
+        return queries.get_board(board_id)
+    else:
+        raise ValueError
+
+
 @app.route("/api/boards/<int:board_id>/cards/")
 @json_response
 def get_cards_for_board(board_id: int):
@@ -101,6 +119,13 @@ def get_cards_for_board(board_id: int):
     :param board_id: id of the parent board
     """
     return queries.get_cards_for_board(board_id)
+
+
+@app.route("/api/statuses")
+@json_response
+def get_statuses():
+
+    return queries.get_statuses()
 
 
 def main():

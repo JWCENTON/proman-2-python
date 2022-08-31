@@ -2,6 +2,7 @@ import {dataHandler, sendBoardTitle} from "../data/dataHandler.js";
 import {htmlFactory, htmlTemplates, createBoard} from "../view/htmlFactory.js";
 import {domManager} from "../view/domManager.js";
 import {cardsManager} from "./cardsManager.js";
+import {statusManager} from "./statusManager.js";
 
 
 export let boardsManager = {
@@ -12,9 +13,19 @@ export let boardsManager = {
             const content = boardBuilder(board);
             domManager.addChild("#root", content);
             domManager.addEventListener(
-                `.toggle-board-button[data-board-id="${board.id}"]`,
+                `.board-toggle[data-board-id="${board.id}"]`,
                 "click",
                 showHideButtonHandler
+            );
+            domManager.addEventListener(
+                `.board-title[data-board-id="${board.id}"]`,
+                "click",
+                startEditBoardTitle
+            );
+            domManager.addEventListener(
+                `.board-title-save[data-board-id="${board.id}"]`,
+                "click",
+                endEditBoardTitle
             );
         }
     },
@@ -22,6 +33,9 @@ export let boardsManager = {
 
 function showHideButtonHandler(clickEvent) {
     const boardId = clickEvent.target.dataset.boardId;
+    const ss = document.querySelector(`.board-toggle[data-board-id="${boardId}"]`);
+    ss.classList.toggle('hidden')
+    statusManager.loadStatuses(boardId);
     cardsManager.loadCards(boardId);
 };
 
@@ -31,6 +45,29 @@ function checkForEmptyTitle(title){
     }
     return true
 };
+
+function startEditBoardTitle(e) {
+    let spanElem = e.target;
+    spanElem.hidden = true;
+    let boardId = spanElem.getAttribute('data-board-id');
+    let inputElem = document.querySelector(`.board-title-edit[data-board-id="${boardId}"]`)
+    console.log("InputElem: ", inputElem);
+    inputElem.hidden = false;
+    let saveElem = document.querySelector(`.board-title-save[data-board-id="${boardId}"]`)
+    console.log("SaveElem: ", saveElem);
+    saveElem.hidden = false;
+}
+
+function endEditBoardTitle(e) {
+    let saveElem = e.target;
+    saveElem.hidden = true;
+    let boardId = saveElem.getAttribute('data-board-id');
+    let inputElem = document.querySelector(`.board-title-edit[data-board-id="${boardId}"]`)
+    inputElem.hidden = true;
+    let spanElem = document.querySelector(`.board-title[data-board-id="${boardId}"]`)
+    spanElem.hidden = false;
+    // send data to api -> POST on /api/board/${boardId}
+}
 
 export function getNewBoardTitle(){
     let saveButton = document.getElementById('save-button');

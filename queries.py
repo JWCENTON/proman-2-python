@@ -30,6 +30,36 @@ def get_boards():
     )
 
 
+def get_board(board_id):
+    """
+    Returns board by its id
+    :return:
+    """
+    return data_manager.execute_select(
+        """
+        SELECT * FROM boards
+        WHERE id = %s
+        ;
+        """, [board_id], # Execute select function requires list/dict
+        fetchall=False
+
+    )
+
+
+
+def update_board(board_data):
+    """
+    Updates board, eg. change title
+    """
+    data_manager.execute_insert(
+        """
+        UPDATE boards SET title = %(title)s
+         WHERE id = %(id)s
+        """,
+        board_data
+    )
+
+
 def get_cards_for_board(board_id):
 
     matching_cards = data_manager.execute_select(
@@ -52,6 +82,17 @@ def get_user_by_username(username):
         WHERE username= %(username)s ; """, {"username": username}, False
     )
     return matching_account
+
+
+def get_statuses():
+
+    statuses = data_manager.execute_select(
+        """
+        SELECT * FROM statuses
+        """
+    )
+
+    return statuses
 
 
 def insert_user(user):
