@@ -121,6 +121,26 @@ def get_cards_for_board(board_id: int):
     return queries.get_cards_for_board(board_id)
 
 
+@app.route("/api/boards/<int:board_id>/cards/<int:card_id>")
+@json_response
+def get_card(board_id, card_id):
+    """
+    Returns board by id
+    """
+    return queries.get_card(board_id, card_id)
+
+
+@app.route("/api/boards/<int:board_id>/cards/<int:card_id>", methods=['POST'])
+@json_response
+def save_card(board_id: int, card_id: int):
+    data = request.get_json()
+    if data is not None:
+        queries.update_card(data)
+        return queries.get_card(board_id, card_id)
+    else:
+        raise ValueError
+
+
 @app.route("/api/statuses")
 @json_response
 def get_statuses():
