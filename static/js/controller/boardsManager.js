@@ -2,6 +2,7 @@ import {dataHandler} from "../data/dataHandler.js";
 import {htmlFactory, htmlTemplates, createBoard} from "../view/htmlFactory.js";
 import {domManager} from "../view/domManager.js";
 import {cardsManager} from "./cardsManager.js";
+import {statusManager} from "./statusManager.js";
 
 
 export let boardsManager = {
@@ -12,7 +13,7 @@ export let boardsManager = {
             const content = boardBuilder(board);
             domManager.addChild("#root", content);
             domManager.addEventListener(
-                `.toggle-board-button[data-board-id="${board.id}"]`,
+                `.board-toggle[data-board-id="${board.id}"]`,
                 "click",
                 showHideButtonHandler
             );
@@ -22,6 +23,9 @@ export let boardsManager = {
 
 function showHideButtonHandler(clickEvent) {
     const boardId = clickEvent.target.dataset.boardId;
+    const ss = document.querySelector(`.board-toggle[data-board-id="${boardId}"]`);
+    ss.classList.toggle('hidden')
+    statusManager.loadStatuses(boardId);
     cardsManager.loadCards(boardId);
 };
 

@@ -54,6 +54,17 @@ def get_user_by_username(username):
     return matching_account
 
 
+def get_statuses():
+
+    statuses = data_manager.execute_select(
+        """
+        SELECT * FROM statuses
+        """
+    )
+
+    return statuses
+
+
 def insert_user(user):
     data_manager.execute_insert(
         """
