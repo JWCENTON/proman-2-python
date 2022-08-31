@@ -30,7 +30,16 @@ function boardBuilder(board) {
                         <input class="board-title-edit hidden" data-board-id="${board.id}" value="${board.title}"/>
                         <button class="board-title-save hidden" data-board-id="${board.id}">Save title</button>
                         <span> is private? ${board.is_private}</span>
-                        <button class="board-add">Add Card</button>
+                        
+                        <button id="myBtn${board.id}" class="board-add" data-board-id="${board.id}">Add Card</button>
+                        <div id="myModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <p>Create new card</p>
+                                <input id="card-input" type="text" minlength="1" placeholder="Enter new title"/>
+                                <button id="save-card" class="save">Save</button>
+                            </div>
+                        </div>
                         <button class="status-add" data-board-id="${board.id}">Add Status</button>
                         <button class="board-toggle" data-board-id="${board.id}">⬇️</button>
                     </div>
