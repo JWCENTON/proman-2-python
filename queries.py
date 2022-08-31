@@ -40,11 +40,10 @@ def get_board(board_id):
         SELECT * FROM boards
         WHERE id = %s
         ;
-        """, [board_id], # Execute select function requires list/dict
+        """, [board_id],  # Execute select function requires list/dict
         fetchall=False
 
     )
-
 
 
 def update_board(board_data):
@@ -93,6 +92,14 @@ def get_statuses():
     )
 
     return statuses
+
+
+def insert_sataus(status):
+    data_manager.execute_insert(
+        """
+        INSERT INTO statuses VALUES (DEFAULT, %s,%s,%s);
+        """, (status['title'], status['status_id'], status['board_id'])
+    )
 
 
 def insert_user(user):

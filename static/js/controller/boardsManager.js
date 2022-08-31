@@ -27,6 +27,11 @@ export let boardsManager = {
                 "click",
                 endEditBoardTitle
             );
+            domManager.addEventListener(
+                `.status-add[data-board-id="${board.id}"]`,
+                "click",
+                addBoardStatus
+            );
         }
     },
 };
@@ -44,6 +49,21 @@ function checkForEmptyTitle(title){
     }
     return true
 };
+
+function addBoardStatus(clickEvent){
+    const boardId = clickEvent.target.dataset.boardId;
+    let boardColumnsSelector = document.querySelector(`.board-columns[data-board-id="${boardId}"]`).childNodes;
+    const childs = [];
+    boardColumnsSelector.forEach(item =>{
+        if (item.className == "board-column"){
+            childs.push(item)
+        }
+    })
+    const lastStatusId = childs.length + 1;
+    console.log(boardId,lastStatusId)
+    dataHandler.createNewStatus("new status", boardId, lastStatusId)
+
+}
 
 function startEditBoardTitle(e) {
     let spanElem = e.target;

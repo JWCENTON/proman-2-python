@@ -30,6 +30,7 @@ function boardBuilder(board) {
                         <input class="board-title-edit" data-board-id="${board.id}" value="${board.title}" hidden/>
                         <button class="board-title-save" data-board-id="${board.id}" hidden>Save title</button>
                         <button class="board-add">Add Card</button>
+                        <button class="status-add" data-board-id="${board.id}">Add Status</button>
                         <button class="board-toggle" data-board-id="${board.id}">⬇️</button>
                     </div>
                     <div id="col" class="board-columns" data-board-id="${board.id}">

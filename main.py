@@ -128,6 +128,16 @@ def get_statuses():
     return queries.get_statuses()
 
 
+@app.route("/add-new-status", methods=['POST'])
+@json_response
+def add_new_status():
+    data = request.get_json()
+    if data is not None:
+        queries.insert_sataus(data)
+    else:
+        raise ValueError
+
+
 def main():
     app.run(debug=True)
 
