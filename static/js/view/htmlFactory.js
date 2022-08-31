@@ -41,7 +41,7 @@ function cardBuilder(card) {
     return `
     
         <div class="card" data-card-id="${card.id}">
-            <div class="card-remove"><i class="fas fa-trash-alt"></i></div>
+            <div class="card-remove" data-card-id="${card.id}" ><i class="fas fa-trash-alt"></i></div>
             <div class="card-title">${card.title}</div>
             
         </div>
@@ -52,6 +52,7 @@ function cardBuilder(card) {
 function columnBuilder(status){
     return `
         <div class="board-column">
+            <div class="remove-column" data-status-id="${status.id}"><i class="fas fa-trash-alt" data-status-id="${status.id}"></i></div>
             <div class="board-column-title">${status.title}</div>
             <div class="board-column-content" data-status-id="${status.status_id}">
          

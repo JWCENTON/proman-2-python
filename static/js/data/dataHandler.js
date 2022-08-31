@@ -24,8 +24,11 @@ export let dataHandler = {
         // creates new card, saves it and calls the callback function with its data
     },
     createNewStatus: async function (statusTitle, boardId, statusId) {
-        apiPost("http://127.0.0.1:5000/add-new-status", {"title": statusTitle, "board_id":boardId, "status_id":statusId})
+        apiPost("/add-new-status", {"title": statusTitle, "board_id":boardId, "status_id":statusId})
     }, 
+    deleteStatus: async function(statusId) {
+        apiDelete(`/api/statuses/${statusId}/delete`);
+    },
 };
 
 async function apiGet(url) {
@@ -50,8 +53,8 @@ async function apiPost(url, payload) {
 
 }
 
-
 async function apiDelete(url) {
+    await fetch(url, {method: 'DELETE'})
 }
 
 async function apiPut(url) {

@@ -116,3 +116,11 @@ def insert_new_board_title(board_title):
         INSERT INTO boards (title) VALUES (%(b_t)s);
         """, {'b_t': board_title}
     )
+
+
+def delete_status(status_id):
+    data_manager.execute_delete(
+        """
+        DELETE FROM statuses WHERE id=%s
+        """, (str(status_id))
+    )

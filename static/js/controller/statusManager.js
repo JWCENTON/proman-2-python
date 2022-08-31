@@ -10,8 +10,18 @@ export let statusManager = {
             const content = statusesBuilder(status);
             if(status.board_id == boardId){
             domManager.addChild(`.board-columns[data-board-id="${boardId}"`, content);
+            domManager.addEventListener(
+                `.remove-column[data-status-id="${status.id}"]`,
+                "click",
+                removeColumn
+            );
           }
         }
     },
 };
 
+function removeColumn(clickEvent) {
+    const statusId = clickEvent.target.dataset.statusId;
+    dataHandler.deleteStatus(statusId)
+};
+// 
