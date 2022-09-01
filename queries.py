@@ -159,3 +159,11 @@ def delete_card(card_id):
         DELETE FROM cards WHERE id = '{0}'
         """.format(card_id)
     )
+
+
+def delete_board(board_id):
+    data_manager.execute_delete(
+        """
+        DELETE FROM boards WHERE id = '{0}'
+        """.format(board_id)
+    )

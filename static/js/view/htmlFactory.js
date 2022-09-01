@@ -40,6 +40,7 @@ function boardBuilder(board) {
                             </div>
                         </div>
                         <button class="status-add" data-board-id="${board.id}">Add Status</button>
+                        <button class="remove-board" data-board-id="${board.id}"><i class="fas fa-trash-alt" data-board-id="${board.id}"></i></button>
                         <button class="board-toggle" data-board-id="${board.id}">⬇️</button>
                     </div>
                     <div id="col" class="board-columns" data-board-id="${board.id}"> </div>

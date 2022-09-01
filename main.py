@@ -162,6 +162,12 @@ def delete_card(card_id):
     queries.delete_card(card_id)
 
 
+@app.route("/api/boards/<string:board_id>/delete", methods=['DELETE'])
+@json_response
+def delete_board(board_id):
+    queries.delete_board(board_id)
+
+
 def main():
     app.run(debug=True)
 

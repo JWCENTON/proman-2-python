@@ -38,6 +38,11 @@ export let boardsManager = {
                 "click",
                 addCard(`${board.id}`)
             );
+             domManager.addEventListener(
+                `.remove-board[data-board-id="${board.id}"]`,
+                "click",
+                deleteBoard
+            );
         }
     },
 };
@@ -166,3 +171,7 @@ export function createBoardButton(){
     createNewBoard();
 };
 
+function deleteBoard(clickEvent){
+    const boardId = clickEvent.target.dataset.boardId;
+    dataHandler.deleteBoard(boardId)
+}
