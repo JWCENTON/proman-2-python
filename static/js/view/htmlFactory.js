@@ -54,9 +54,18 @@ function columnBuilder(status){
     return `
         <div class="board-column">
             <div class="remove-column" data-status-id="${status.id}"><i class="fas fa-trash-alt" data-status-id="${status.id}"></i></div>
-            <div class="board-column-title">${status.title}</div>
+            <div class="board-column-title" data-status-id="${status.id}"><span class="column-title" data-status-id="${status.id}" >${status.title}</span></div>
             <div class="board-column-content" data-status-id="${status.status_id}">
          
+
+    `
+}
+
+
+export function inputTitle(id, title){
+    return `
+    <input class="title-edit " data-input-id="${id}" value="${title}"/>
+    <button class="title-save " data-input-id="${id}">Save title</button>
 
     `
 }
