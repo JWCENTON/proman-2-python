@@ -121,8 +121,8 @@ def insert_new_board_title(data):
 def delete_status(status_id):
     data_manager.execute_delete(
         """
-        DELETE FROM statuses WHERE id = %s
-        """, status_id
+        DELETE FROM statuses WHERE id = '{0}'
+        """.format(status_id)
     )
 
 
@@ -150,4 +150,12 @@ def add_new_card(card, new_card_order_id):
               's_i': int(card['status_id']),
               't_e': card['title'],
               'c_o': new_card_order_id}
+    )
+
+
+def delete_card(card_id):
+    data_manager.execute_delete(
+        """
+        DELETE FROM statuses WHERE id = '{0}'
+        """.format(card_id)
     )

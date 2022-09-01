@@ -30,6 +30,9 @@ export let dataHandler = {
     deleteStatus: async function(statusId) {
         apiDelete(`/api/statuses/${statusId}/delete`);
     },
+    deleteCard: async function(cardId){
+        apiDelete(`/api/cards/${cardId}/delete`);
+    },
     updateStatusTitle: async function (statusId, statusTitle){
         apiPost(`/api/statuses/${statusId}/update`, {"title": statusTitle, "id": statusId})
     }

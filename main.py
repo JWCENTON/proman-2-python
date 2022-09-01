@@ -156,6 +156,12 @@ def add_new_card():
     queries.add_new_card(data, new_card_id)
 
 
+@app.route("/api/cards/<string:card_id>/delete", methods=['DELETE'])
+@json_response
+def delete_card(card_id):
+    queries.delete_card(card_id)
+
+
 def main():
     app.run(debug=True)
 

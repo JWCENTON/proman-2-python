@@ -25,4 +25,5 @@ export let cardsManager = {
 };
 
 function deleteButtonHandler(clickEvent) {
+    const cardId = clickEvent.target.dataset.cardId;
 }
