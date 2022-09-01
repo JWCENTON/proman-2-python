@@ -9,7 +9,7 @@ export let cardsManager = {
         for (let status of statuses){
             for (let card of cards) {
                 
-                if (card.status_id == status.status_id){
+                if (card.status_id == status.status_id && card.board_id == status.board_id){
                     const cardBuilder = htmlFactory(htmlTemplates.card);
                     const content = cardBuilder(card);
                     domManager.addChild(`.board-column-content[data-status-id="${status.id}"]`, content);
