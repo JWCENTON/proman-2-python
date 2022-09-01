@@ -53,10 +53,10 @@ function cardBuilder(card) {
     return `
     
         <div class="card" data-card-id="${card.id}">
-        <div class="card-title">${card.title}</div>
-        <div class="card-remove"data-card-id="${card.id}" ><i class="fas fa-trash-alt" data-card-id="${card.id}"></i></div>
-        </div>  
-   
+             <div class="card-title" data-card-id="${card.id}">${card.title}</div>
+             <input class="card-title-edit hidden" data-card-id="${card.id}" value="${card.title}"/>
+             <div class="card-remove"data-card-id="${card.id}" ><i class="fas fa-trash-alt" data-card-id="${card.id}"></i></div>
+        </div>
 
     `;
 }

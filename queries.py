@@ -71,6 +71,35 @@ def get_cards_for_board(board_id):
     return matching_cards
 
 
+def get_card(board_id, card_id):
+    """
+    Returns board by its id
+    :return:
+    """
+    return data_manager.execute_select(
+        """
+        SELECT * FROM cards
+        WHERE cards.board_id = %(board_id)s 
+        AND id = %(card_id)s
+        ;
+        """, {"board_id": board_id, "card_id": card_id},  # Execute select function requires list/dict
+        fetchall=False
+    )
+
+
+def update_card(card_data):
+    """
+    Updates board, eg. change title
+    """
+    data_manager.execute_insert(
+        """
+        UPDATE cards SET title = %(title)s
+        WHERE board_id = %(boardId)s 
+        AND id = %(id)s
+        """, card_data
+    )
+
+
 def get_user_by_username(username):
     """
     Find the first status matching the given username
