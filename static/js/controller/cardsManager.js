@@ -7,11 +7,12 @@ export let cardsManager = {
         const cards = await dataHandler.getCardsByBoardId(boardId);
         const statuses = await dataHandler.getStatuses();
         for (let status of statuses){
-            for (let card of cards) {               
-                if (card.status_id == status.status_id && card.board_id == status.board_id){
+            for (let card of cards) {
+                
+                if (card.status_id == status.status_id ){
                     const cardBuilder = htmlFactory(htmlTemplates.card);
                     const content = cardBuilder(card);
-                    domManager.addChild(`.board-column-content[data-status-id="${status.id}"]`, content);
+                    domManager.addChild(`.board[data-board-id="${boardId}"] .board-column-content[data-status-id="${status.id}"]`, content);
                     domManager.addEventListener(
                         `.card[data-card-id="${card.id}"]`,
                         "click",

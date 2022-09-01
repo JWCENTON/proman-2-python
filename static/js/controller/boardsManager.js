@@ -69,6 +69,7 @@ function addCard(boardID){
 
 function showHideButtonHandler(clickEvent) {
     const boardId = clickEvent.target.dataset.boardId;
+    console.log(boardId)
     document.querySelector(`.board-toggle[data-board-id="${boardId}"]`).classList.toggle('hidden');
     statusManager.loadStatuses(boardId);
     cardsManager.loadCards(boardId);
