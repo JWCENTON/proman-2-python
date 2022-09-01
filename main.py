@@ -8,6 +8,7 @@ import re
 
 mimetypes.add_type('application/javascript', '.js')
 app = Flask(__name__)
+
 app.secret_key = secrets.token_hex()
 load_dotenv()
 
@@ -168,11 +169,24 @@ def delete_board(board_id):
     queries.delete_board(board_id)
 
 
+@app.route("/api/cookies")
+@json_response
+def get_cookies():
+    if session:
+        cos = {
+            'loggedin': session['loggedin'],
+            'id': session['id'],
+            'username': session['username']
+        }
+        return cos
+
+
 def main():
     app.run(debug=True)
 
     # Serving the favicon
     with app.app_context():
+
         app.add_url_rule(
             '/favicon.ico', redirect_to=url_for('static', filename='favicon/favicon.ico'))
 

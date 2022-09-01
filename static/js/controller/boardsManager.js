@@ -8,41 +8,88 @@ import {statusManager} from "./statusManager.js";
 export let boardsManager = {
     loadBoards: async function () {
         const boards = await dataHandler.getBoards();
+        const cookies = await dataHandler.getCookies();
+        console.log(cookies.id)
         for (let board of boards) {
-            const boardBuilder = htmlFactory(htmlTemplates.board);
-            const content = boardBuilder(board);
-            domManager.addChild("#root", content);
-            domManager.addEventListener(
-                `.board-toggle[data-board-id="${board.id}"]`,
-                "click",
-                showHideButtonHandler
-            );
-            domManager.addEventListener(
-                `.board-title[data-board-id="${board.id}"]`,
-                "click",
-                startEditBoardTitle
-            );
-            domManager.addEventListener(
-                `.board-title-save[data-board-id="${board.id}"]`,
-                "click",
-                endEditBoardTitle
-            );
-            domManager.addEventListener(
-                `.status-add[data-board-id="${board.id}"]`,
-                "click",
-                addBoardStatus
-            );
-            domManager.addEventListener(
+            if (cookies != null){
+                if (board.is_private == true ) {
+                    if (board.user_id == cookies.id){
+                const boardBuilder = htmlFactory(htmlTemplates.board);
+                const content = boardBuilder(board);
+                domManager.addChild("#root", content);
+                domManager.addEventListener(
+                    `.board-toggle[data-board-id="${board.id}"]`,
+                    "click",
+                    showHideButtonHandler
+                );
+                domManager.addEventListener(
+                    `.board-title[data-board-id="${board.id}"]`,
+                    "click",
+                    startEditBoardTitle
+                );
+                domManager.addEventListener(
+                    `.board-title-save[data-board-id="${board.id}"]`,
+                    "click",
+                    endEditBoardTitle
+                );
+                domManager.addEventListener(
+                    `.status-add[data-board-id="${board.id}"]`,
+                    "click",
+                    addBoardStatus
+                );
+                domManager.addEventListener(
 
-                `.board-add[data-board-id="${board.id}"]`,
-                "click",
-                addCard(`${board.id}`)
-            );
-             domManager.addEventListener(
-                `.remove-board[data-board-id="${board.id}"]`,
-                "click",
-                deleteBoard
-            );
+                    `.board-add[data-board-id="${board.id}"]`,
+                    "click",
+                    addCard(`${board.id}`)
+                );
+                domManager.addEventListener(
+                    `.remove-board[data-board-id="${board.id}"]`,
+                    "click",
+                    deleteBoard
+                );}
+                else {}
+                }
+                else{
+
+              
+                console.log(board.is_private)
+                const boardBuilder = htmlFactory(htmlTemplates.board);
+                const content = boardBuilder(board);
+                domManager.addChild("#root", content);
+                domManager.addEventListener(
+                    `.board-toggle[data-board-id="${board.id}"]`,
+                    "click",
+                    showHideButtonHandler
+                );
+                domManager.addEventListener(
+                    `.board-title[data-board-id="${board.id}"]`,
+                    "click",
+                    startEditBoardTitle
+                );
+                domManager.addEventListener(
+                    `.board-title-save[data-board-id="${board.id}"]`,
+                    "click",
+                    endEditBoardTitle
+                );
+                domManager.addEventListener(
+                    `.status-add[data-board-id="${board.id}"]`,
+                    "click",
+                    addBoardStatus
+                );
+                domManager.addEventListener(
+
+                    `.board-add[data-board-id="${board.id}"]`,
+                    "click",
+                    addCard(`${board.id}`)
+                );
+                domManager.addEventListener(
+                    `.remove-board[data-board-id="${board.id}"]`,
+                    "click",
+                    deleteBoard
+                );
+                }
+            }
         }
     },
 };

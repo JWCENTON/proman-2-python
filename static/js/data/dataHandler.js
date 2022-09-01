@@ -42,7 +42,9 @@ export let dataHandler = {
     deleteBoard : async function(boardId){
         apiDelete(`/api/boards/${boardId}/delete`)
     },
-
+    getCookies : async function(){
+       return await apiGet(`/api/cookies`)
+    },
 };
 
 async function apiGet(url) {
