@@ -1,4 +1,4 @@
-import {dataHandler, sendBoardTitle} from "../data/dataHandler.js";
+import {dataHandler, apiPost} from "../data/dataHandler.js";
 import {htmlFactory, htmlTemplates, createBoard} from "../view/htmlFactory.js";
 import {domManager} from "../view/domManager.js";
 import {cardsManager} from "./cardsManager.js";
@@ -123,7 +123,7 @@ function endEditBoardTitle(e) {
     let payload = {};
     payload.id = boardId;
     payload.title = newTitle;
-    dataHandler.apiPost("http://127.0.0.1:5000/api/boards/" + `${boardId}`, payload);
+    apiPost("http://127.0.0.1:5000/api/boards/" + `${boardId}`, payload);
 }
 
 export function getNewBoardTitle(){
@@ -141,7 +141,7 @@ export function getNewBoardTitle(){
         button.removeAttribute('hidden');
         saveButton.setAttribute('hidden', 'value');
         console.log(title); // consoling for testing
-        sendBoardTitle(title);
+        dataHandler.createNewBoard(title);
         window.location.reload();
         return title;
     });
