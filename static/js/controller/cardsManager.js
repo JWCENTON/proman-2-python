@@ -1,4 +1,4 @@
-import {dataHandler} from "../data/dataHandler.js";
+import {dataHandler, apiPost} from "../data/dataHandler.js";
 import {htmlFactory, htmlTemplates} from "../view/htmlFactory.js";
 import {domManager} from "../view/domManager.js";
 
@@ -40,6 +40,11 @@ function deleteButtonHandler(clickEvent) {
 function startEditCardTitle(e) {
     let divElem = e.target;
     let cardId = divElem.getAttribute('data-card-id');
+    console.log(cardId);
+    let boardElem = divElem.closest(".board-columns");
+    console.log(boardElem);
+    let boardId = boardElem.getAttribute("data-board-id");
+    console.log(boardId);
     let inputElem = document.querySelector(`.card-title-edit[data-card-id="${cardId}"]`)
     console.log("InputElem: ", inputElem);
     inputElem.classList.toggle("hidden");
@@ -47,6 +52,7 @@ function startEditCardTitle(e) {
     let saveElem = document.querySelector(`.card-title-save[data-card-id="${cardId}"]`)
     console.log("SaveElem: ", saveElem);
     saveElem.classList.toggle("hidden");
+    return boardId
 }
 
 function endEditCardTitle(e) {
@@ -62,5 +68,7 @@ function endEditCardTitle(e) {
     let payload = {};
     payload.id = cardId;
     payload.title = newCardTitle;
-    dataHandler.apiPost("http://127.0.0.1:5000/api/cards/" + `${cardId}`, payload);
+    let boardId = startEditCardTitle(e);
+    payload.boardId = boardId;
+    apiPost("http://127.0.0.1:5000/api/boards/" + `${boardId}` + "/cards/" + `${cardId}`, payload);
 }

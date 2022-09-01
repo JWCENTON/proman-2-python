@@ -100,7 +100,6 @@ def update_card(card_data):
     )
 
 
-
 def get_user_by_username(username):
     """
     Find the first status matching the given username
