@@ -12,15 +12,6 @@ app.secret_key = secrets.token_hex()
 load_dotenv()
 
 
-@app.route('/board_title', methods=['POST'])
-def board_title():
-    output = request.get_json()
-    title = output.get('title')
-    print(title)  # This is the output that was stored in the JSON within the browser
-    queries.insert_new_board_title(title)
-    return redirect('/')
-
-
 @app.route("/")
 def index():
     """
@@ -35,13 +26,9 @@ def login():
         username = request.form['username']
         password = request.form['password']
         # get user by username and password match
-        acc = queries.get_user_by_username(username)
-        print(acc)
-        if acc['username'] == username and acc['password'] == password:
-            account = acc
-        else:
-            account = None
-        if account:
+        account = queries.get_user_by_username(username)
+        if account['username'] == username and account['password'] == password:
+            session['loggedin'] = True
             session['id'] = account['id']
             session['username'] = account['username']
             return redirect(url_for('index'))
@@ -52,6 +39,7 @@ def login():
 
 @app.route("/logout")
 def logout():
+    session.pop('loggedin', None)
     session.pop('id', None)
     session.pop('username', None)
     return redirect(url_for('login'))
@@ -121,10 +109,18 @@ def get_cards_for_board(board_id: int):
     return queries.get_cards_for_board(board_id)
 
 
+@app.route('/board_title', methods=['POST'])
+def board_title():
+    output = request.get_json()
+    print(output, session)
+    queries.insert_new_board_title(
+        {'title': output['title'], 'user_id': session['id'], 'is_private': False})
+    return redirect('/')
+
+
 @app.route("/api/statuses")
 @json_response
 def get_statuses():
-
     return queries.get_statuses()
 
 
@@ -135,11 +131,8 @@ def add_new_status():
     if data is not None:
         queries.insert_sataus(data)
 
-    else:
-        raise ValueError
 
-
-@app.route("/api/statuses/<int:status_id>/delete", methods=['DELETE'])
+@app.route("/api/statuses/<string:status_id>/delete", methods=['DELETE'])
 @json_response
 def delete_status(status_id):
     queries.delete_status(status_id)
@@ -150,7 +143,7 @@ def delete_status(status_id):
 def update_status_title(status_id):
     data = request.get_json()
     print(data)
-    # queries.update_status_title(status_id, data.title)
+    queries.update_status_title(status_id, data['title'])
 
 
 def main():

@@ -90,7 +90,6 @@ def get_statuses():
         SELECT * FROM statuses
         """
     )
-
     return statuses
 
 
@@ -110,19 +109,21 @@ def insert_user(user):
     """, (user['username'], user['email'], user['password']))
 
 
-def insert_new_board_title(board_title):
+def insert_new_board_title(data):
     data_manager.execute_insert(
         """
-        INSERT INTO boards (title) VALUES (%(b_t)s);
-        """, {'b_t': board_title}
+        INSERT INTO boards
+         VALUES (DEFAULT, %s, %s, %s);
+        """, (data['title'], data['user_id'], data['is_private'])
     )
 
 
 def delete_status(status_id):
+    print(status_id)
     data_manager.execute_delete(
         """
-        DELETE FROM statuses WHERE id=%s
-        """, (str(status_id))
+        DELETE FROM statuses WHERE id = %s
+        """, status_id
     )
 
 
