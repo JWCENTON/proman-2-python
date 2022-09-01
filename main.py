@@ -165,6 +165,13 @@ def delete_status(status_id):
     queries.delete_status(status_id)
 
 
+@app.route("/api/statuses/<int:status_id>/update", methods=['PUT'])
+@json_response
+def update_status_title(status_id):
+    data = request.get_json()
+    # queries.update_status_title(status_id, data.title)
+
+
 def main():
     app.run(debug=True)
 

@@ -29,6 +29,9 @@ export let dataHandler = {
     deleteStatus: async function(statusId) {
         apiDelete(`/api/statuses/${statusId}/delete`);
     },
+    updateStatus: async function (statusId){
+        apiPut(`/api/statuses/${statusId}/update`)
+    }
 };
 
 async function apiGet(url) {

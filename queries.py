@@ -154,3 +154,11 @@ def delete_status(status_id):
         DELETE FROM statuses WHERE id=%s
         """, (str(status_id))
     )
+
+
+def update_status_title(status_id, status_title):
+    data_manager.execute_update(
+        """
+     UPDATE statuses SET title = %s
+         WHERE id = %s
+    """, (status_title, status_id))
