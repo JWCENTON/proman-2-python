@@ -94,8 +94,8 @@ def update_card(card_data):
     data_manager.execute_insert(
         """
         UPDATE cards SET title = %(title)s
-        WHERE board_id = %(board_id)s 
-        AND id = %(card_id)s
+        WHERE board_id = %(boardId)s 
+        AND id = %(id)s
         """, card_data
     )
 

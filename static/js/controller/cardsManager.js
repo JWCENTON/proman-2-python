@@ -24,9 +24,13 @@ export let cardsManager = {
                         startEditCardTitle
                     );
                     domManager.addEventListener(
-                        `.card-title-save[data-card-id="${card.id}"]`,
+                        `.card-title-edit[data-card-id="${card.id}"]`,
                         "keypress",
-                        endEditCardTitle
+                        function (e) {
+                            if (e.key === 'Enter') {
+                                endEditCardTitle(e);
+                            }
+                        }
                     );
                 }
             }
@@ -49,26 +53,22 @@ function startEditCardTitle(e) {
     console.log("InputElem: ", inputElem);
     inputElem.classList.toggle("hidden");
     divElem.classList.toggle("hidden");
-    let saveElem = document.querySelector(`.card-title-save[data-card-id="${cardId}"]`)
-    console.log("SaveElem: ", saveElem);
-    saveElem.classList.toggle("hidden");
-    return boardId
 }
 
 function endEditCardTitle(e) {
-    let saveElem = e.target;
-    saveElem.classList.toggle("hidden");
-    let cardId = saveElem.getAttribute('data-card-id');
-    let inputElem = document.querySelector(`.card-title-edit[data-card-id="${cardId}"]`)
-    let newCardTitle = inputElem.value
+    let inputElem = e.target;
     inputElem.classList.toggle("hidden");
-    let divElem = document.querySelector(`.card-title[data-card-id="${cardId}"]`)
+    let cardId = inputElem.getAttribute('data-card-id');
+    let newCardTitle = inputElem.value;
+    let divElem = document.querySelector(`.card-title[data-card-id="${cardId}"]`);
     divElem.innerHTML = newCardTitle;
     divElem.classList.toggle("hidden");
+    let boardElem = divElem.closest(".board-columns");
+    console.log(boardElem);
+    let boardId = boardElem.getAttribute("data-board-id");
     let payload = {};
     payload.id = cardId;
     payload.title = newCardTitle;
-    let boardId = startEditCardTitle(e);
     payload.boardId = boardId;
     apiPost("http://127.0.0.1:5000/api/boards/" + `${boardId}` + "/cards/" + `${cardId}`, payload);
 }

@@ -44,7 +44,6 @@ function cardBuilder(card) {
         <div class="card" data-card-id="${card.id}">
              <div class="card-title" data-card-id="${card.id}">${card.title}</div>
              <input class="card-title-edit hidden" data-card-id="${card.id}" value="${card.title}"/>
-             <button class="card-title-save hidden" data-card-id="${card.id}">Save card title</button>
                         
         </div>
 
