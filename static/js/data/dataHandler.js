@@ -35,7 +35,11 @@ export let dataHandler = {
     },
     updateStatusTitle: async function (statusId, statusTitle){
         apiPost(`/api/statuses/${statusId}/update`, {"title": statusTitle, "id": statusId})
+    },
+    updateBoardTitle : async function (boardId, payload ){
+        apiPost(`/api/boards/${boardId}`, payload);
     }
+
 };
 
 async function apiGet(url) {

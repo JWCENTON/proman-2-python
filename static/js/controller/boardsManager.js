@@ -1,4 +1,4 @@
-import {dataHandler, apiPost} from "../data/dataHandler.js";
+import {dataHandler} from "../data/dataHandler.js";
 import {htmlFactory, htmlTemplates, createBoard} from "../view/htmlFactory.js";
 import {domManager} from "../view/domManager.js";
 import {cardsManager} from "./cardsManager.js";
@@ -124,7 +124,7 @@ function endEditBoardTitle(e) {
     let payload = {};
     payload.id = boardId;
     payload.title = newTitle;
-    apiPost("http://127.0.0.1:5000/api/boards/" + `${boardId}`, payload);
+    dataHandler.updateBoardTitle(boardId, payload);
 }
 
 export function getNewBoardTitle(){
