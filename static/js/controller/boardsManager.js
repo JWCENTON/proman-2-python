@@ -32,8 +32,39 @@ export let boardsManager = {
                 "click",
                 addBoardStatus
             );
+            domManager.addEventListener(
+
+                `.board-add[data-board-id="${board.id}"]`,
+                "click",
+                addCard(`${board.id}`)
+            );
         }
     },
+};
+
+function addCard(boardID){
+    let modal = document.getElementById("myModal");
+    let btn = document.getElementById(`myBtn${boardID}`);
+    let span = document.getElementsByClassName("close")[0];
+    let input = document.getElementById(`card-input${boardID}`);
+    let save = document.getElementById(`save-card${boardID}`);
+    btn.addEventListener('click', () => {
+      modal.style.display = "block";
+    })
+    span.addEventListener('click', () => {
+      modal.style.display = "none";
+    })
+    save.addEventListener('click', () => {
+        modal.style.display = "none";
+        let payload = input.value;
+        dataHandler.createNewCard(payload, boardID, '1');
+        input.value = '';
+    })
+    window.addEventListener('click', event => {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    })
 };
 
 function showHideButtonHandler(clickEvent) {

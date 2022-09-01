@@ -146,6 +146,16 @@ def update_status_title(status_id):
     queries.update_status_title(status_id, data['title'])
 
 
+@app.route("/add-new-card", methods=['POST'])
+@json_response
+def add_new_card():
+    data = request.get_json()
+    card_order = queries.get_card_order_n(data)
+    print(card_order)
+    new_card_id = (len(card_order) + 1)
+    queries.add_new_card(data, new_card_id)
+
+
 def main():
     app.run(debug=True)
 
