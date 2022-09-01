@@ -7,8 +7,7 @@ export let cardsManager = {
         const cards = await dataHandler.getCardsByBoardId(boardId);
         const statuses = await dataHandler.getStatuses();
         for (let status of statuses){
-            for (let card of cards) {
-                
+            for (let card of cards) {               
                 if (card.status_id == status.status_id && card.board_id == status.board_id){
                     const cardBuilder = htmlFactory(htmlTemplates.card);
                     const content = cardBuilder(card);
@@ -26,4 +25,5 @@ export let cardsManager = {
 
 function deleteButtonHandler(clickEvent) {
     const cardId = clickEvent.target.dataset.cardId;
+    dataHandler.deleteCard(cardId)
 }
