@@ -124,3 +124,22 @@ def delete_status(status_id):
         DELETE FROM statuses WHERE id=%s
         """, (str(status_id))
     )
+
+
+def get_card_order_n(card):
+    card_orders = data_manager.execute_select("""
+    SELECT card_order FROM cards WHERE (status_id = 1 AND board_id = %(b_i)s) GROUP BY card_order
+    """, {'b_i': int(card['board_id'])}
+    )
+    return card_orders
+
+
+def add_new_card(card, new_card_order_id):
+    data_manager.execute_insert(
+        """
+        INSERT INTO cards (board_id, status_id, title, card_order) VALUES ( %(b_i)s,  %(s_i)s, %(t_e)s, %(c_o)s)
+        """, {'b_i': int(card['board_id']),
+              's_i': int(card['status_id']),
+              't_e': card['title'],
+              'c_o': new_card_order_id}
+    )
