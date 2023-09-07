@@ -24,31 +24,13 @@ Oh and I hope you've learnt from Jacob's mistake about arriving late to the offi
 
 Mark
 ```
+It is "one pager" app, where all the boards are displayed, and when one is opened, the corresponding cards are shown.
 
-## What are you going to learn?
-
-- Understand practical AJAX usage.
-- Master web development.
-- Plan the development of an advanced product.
-- Deploy your project.
-
-## Tasks
-
-1. Deploy the ProMan project so it is hosted on a publicly accessible server.
-    - There is a public URL where the finished product can be tested.
-    - The public version of the app is used on the sprint demo.
-
-2. Create a new sprint from the existing backlog. Last week you had a long list of stories, but you only one new story (Deploy ProMan) this week.
-    - The new task is added to the backlog.
-    - A new sprint plan is created from the unfinished stories.
+It is an application which is easy to use at first glance, where functionality is straightforward, and the application looks nice on different screen sizes.
 
 ## General requirements
 
 None
-
-## Hints
-
-- Continue working on the same repository as the first part of this project.
 
 ## Background materials
 
